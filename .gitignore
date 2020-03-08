@@ -11,7 +11,7 @@
 # Laravel 4 specific
 /dependencies/bootstrap/compiled.php
 /dependencies/app/storage/
-dependencies/storage/logs/laravel.log
+/dependencies/storage/logs/laravel.log
 
 # Laravel 5 & Lumen specific
 /dependencies/public/storage
