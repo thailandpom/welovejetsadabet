@@ -15,7 +15,8 @@
   <meta property="og:site_name" content="Degito Bangkok" />
   <link rel="canonical" href="" />
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/material-design-iconic-font/2.2.0/css/material-design-iconic-font.min.css">
-
+  <link rel="stylesheet" id="css-theme" href="{{ asset('/assets/css/dashmix.css') }}">  
+  <link rel="stylesheet" id="css-theme" href="{{ asset('/assets/css/backend-color.css') }}">
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.css">
   <link rel="stylesheet" href="https://use.typekit.net/obm6pja.css">
   <link rel="stylesheet" href="{{asset('/assets/css/main.css')}}">

@@ -14,3 +14,15 @@
 .note-editable.card-block {
   height: 350px;
 }
+.h-100vh {
+  height: 100vh;
+}
+.h-100 {
+  height: 100%;
+}
+.new-color {
+  background-color: #e04f1a;
+}
+.new-color:hover, .new-color:active, .new-color:focus, .new-color:focus-within, .new-color:visited {
+  background-color: #e04f1a !important;
+}

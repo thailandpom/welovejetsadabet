@@ -102,11 +102,11 @@
             </td>
             <td class="font-w600 text-center">{{$item->created_at}}</td>
             <td class="text-right">
-              <a href="{{ route('pages.edit', $item->widget_id) }}">
+              {{-- <a href="{{ route('pages.edit', $item->widget_id) }}">
                 <button type="button" class="btn btn-hero-sm btn-hero-warning btn-square" data-toggle="tooltip" id="delbutton" title="แก้ไข">
                   <i class="fa fa-pencil-alt"></i>
                 </button>
-              </a>
+              </a> --}}
               <button type="button" class="btn btn-hero-sm btn-hero-danger btn-square" data-toggle="tooltip" id="delbutton" title="ลบ" onclick="deletePage('{{ $item->widget_id }}');">
                 <i class="fa fa-trash"></i>
               </button>

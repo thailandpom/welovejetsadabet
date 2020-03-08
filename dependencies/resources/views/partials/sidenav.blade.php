@@ -3,8 +3,8 @@
   <div class="bg-header-dark">
     <div class="content-header bg-white-10">
       <!-- Logo -->
-      <a class="link-fx font-w600 font-size-lg text-white" href="{{ route('dashboard') }}">
-        <img class="img-logo" src="{{config('app.url')}}/assets/icon/icon-mobile.png">
+      <a class="link-fx font-w600 font-size-lg text-white" href="{{ route('pages.index') }}">
+        <img class="img-logo" src="{{asset('/assets/icon/logojetsada.png')}}" style="height: 64px;">
       </a>
     </div>
   </div>

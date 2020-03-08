@@ -1,7 +1,7 @@
 @extends('layouts.app')
 
 @section('content')
-<div id="page-container" class="h-100">
+<div id="page-container" class="h-100vh">
     <div class="h-100">
         <!-- Main Container -->
         <main id="main-container" class="h-100">
@@ -12,14 +12,14 @@
                     <!-- Sign In Block -->
                     <div class="block block-rounded block-transparent block-fx-pop w-100 mb-0 overflow-hidden bg-image" style="background-image: url('{{asset('/assets/images/contact_img.png')}}');">
                         <div class="row justify-content-center">
-                            <div class="col-md-6 order-md-1 bg-white">
-                                <div class="block-content block-content-full px-lg-5 py-md-5 py-lg-6">
+                            <div class="col-md-12 order-md-1 bg-white">
+                                <div class="block-content block-content-full px-lg-5 py-md-5 py-lg-6 login">
                                     <!-- Header -->
                                     <div class="mb-2 text-center">
                                         <a class="link-fx font-w700 font-size-h1" href="#">
-                                            <img class="img-logo"  src="" style="height: 40px;">
+                                            <img class="img-logo"  src="{{asset('/assets/icon/logojetsada.png')}}" style="height: 108px;">
                                         </a>
-                                        <p class="text-uppercase font-w700 font-size-sm text-muted pt-2">Sign In</p>
+                                        <h3 class="text-uppercase font-w700 text-muted pt-2">ลงชื่อเข้าใช้งานระบบ</h3>
                                     </div>
                                     <!-- END Header -->
                                     <form class="js-validation-signin" method="POST" action="{{ route('login') }}">
@@ -58,8 +58,8 @@
 
                                         </div>
                                         <div class="form-group">
-                                            <button type="submit" class="btn btn-block btn-hero-primary" style="">
-                                                Sign In
+                                            <button type="submit" class="btn btn-block btn-hero-primary new-color" style="">
+                                                ลงชื่อเข้าใช้งานระบบ
                                             </button>
                                         </div>
                                     </form>
