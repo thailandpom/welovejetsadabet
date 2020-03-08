@@ -23,7 +23,7 @@ class FrontendController extends Controller
   }
 
   public function getContent($slug) 
-  {
+  { 
     $pages = DB::table('pages')->where('slug', $slug)->first();
     $page_id = $pages->page_id;
     // $widgets = DB::table('widget')
