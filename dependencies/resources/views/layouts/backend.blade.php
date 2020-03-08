@@ -83,7 +83,7 @@
   <script>
   $(document).ready(function () {
     $(".note-btn.btn.btn-light.btn-sm.dropdown-toggle .note-current-fontname").parent().addClass('d-none');
-   
+    $('.dropdown-toggle').dropdown()
   });
   </script>
   @yield('js')
