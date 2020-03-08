@@ -22,14 +22,14 @@
 
       <li class="nav-main-item {{ ($name == 'Pages') ? 'open' : ''}}">
         <a class="nav-main-link {{ ($name == 'Pages') ? 'active' : ''}}" href="{{ route('pages.index') }}">
-          <i class="nav-main-link-icon si si-user"></i>
+          <i class="nav-main-link-icon si si-docs"></i>
           <span class="nav-main-link-name">หน้าเว็บ</span>
         </a>
       </li>
 
       <li class="nav-main-item {{ ($name == 'Contact') ? 'open' : ''}}">
         <a class="nav-main-link {{ ($name == 'Contact') ? 'active' : ''}}" href="{{ route('contact.index') }}">
-          <i class="nav-main-link-icon si si-user"></i>
+          <i class="nav-main-link-icon si si-call-out"></i>
           <span class="nav-main-link-name">ข้อมูลติดต่อ</span>
         </a>
       </li>
