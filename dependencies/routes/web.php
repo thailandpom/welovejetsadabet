@@ -16,6 +16,7 @@ Route::prefix('/api')->group(function () {
 
   Route::get('/getPage/{slug?}', array('middleware' => 'cors', 'uses' => 'FrontendController@getPage'));
   Route::get('/getContent/{slug?}', array('middleware' => 'cors', 'uses' => 'FrontendController@getContent'));
+  Route::get('/getContact', array('middleware' => 'cors', 'uses' => 'FrontendController@getContact'));
 
 });
 
@@ -34,6 +35,10 @@ Route::prefix('/backend')->group(function () {
   Route::get('/pages/create_widget/{id?}/{widgetType?}', 'WidgetController@create')->name('create_widget');
   Route::get('/pages/widget_destroy/{id?}', 'WidgetController@destroy')->name('widget_destroy');
   Route::post('/pages/widget/update_order', 'WidgetController@update_order')->name('update_order');
+
+  Route::resource('contact', 'ContactController');
+  Route::get('/contact/contact_destroy/{id?}', 'ContactController@destroy')->name('contact_destroy');
+  Route::post('/contact/contact_update', 'ContactController@update')->name('contact_update');
 
   Route::resource('users', 'UserController');
   Route::get('/users/edit_profile/{id?}', 'UserController@edit_profile')->name('edit_profile');

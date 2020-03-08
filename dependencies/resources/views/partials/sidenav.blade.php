@@ -22,6 +22,13 @@
         </a>
       </li>
 
+      <li class="nav-main-item {{ ($name == 'Contact') ? 'open' : ''}}">
+        <a class="nav-main-link {{ ($name == 'Contact') ? 'active' : ''}}" href="{{ route('contact.index') }}">
+          <i class="nav-main-link-icon si si-user"></i>
+          <span class="nav-main-link-name">ข้อมูลติดต่อ</span>
+        </a>
+      </li>
+
       <li class="nav-main-item {{ ($name == 'Users') ? 'open' : ''}}">
         <a class="nav-main-link {{ ($name == 'Users') ? 'active' : ''}}" href="{{ route('users.index') }}">
           <i class="nav-main-link-icon si si-user"></i>

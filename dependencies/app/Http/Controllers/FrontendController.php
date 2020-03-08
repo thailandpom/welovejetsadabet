@@ -37,5 +37,13 @@ class FrontendController extends Controller
       ], 200);
   }
 
+  public function getContact() 
+  {
+    $contacts = DB::table('contact')->get();
+      return response()->json([
+          'contacts' => $contacts,
+      ], 200);
+  }
+
 
 }
