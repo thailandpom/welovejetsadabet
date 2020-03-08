@@ -81,10 +81,10 @@
     jQuery(function(){ Dashmix.helpers(['datepicker', 'colorpicker']); });
   </script> --}}
   <script>
-  $(document).ready(function () {
+  {{-- $(document).ready(function () {
     $(".note-btn.btn.btn-light.btn-sm.dropdown-toggle .note-current-fontname").parent().addClass('d-none');
    
-  });
+  }); --}}
   </script>
   @yield('js')
 

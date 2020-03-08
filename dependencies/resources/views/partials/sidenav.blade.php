@@ -6,6 +6,11 @@
       <a class="link-fx font-w600 font-size-lg text-white" href="{{ route('pages.index') }}">
         <img class="img-logo" src="{{asset('/assets/icon/logojetsada.png')}}" style="height: 64px;">
       </a>
+      <div class="d-block d-lg-none">
+        <button type="button" class="btn btn-hero-danger btn-square btn-hero-sm mr-1 btn-swap btn-swap-a" data-toggle="layout" data-action="sidebar_toggle">
+          <i class="fa fa-fw fa-bars"></i>
+        </button>
+      </div>
     </div>
   </div>
   <!-- END Side Header -->
