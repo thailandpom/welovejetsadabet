@@ -1,0 +1,16 @@
+.bg-header-dark {
+  background-color: #ffffff !important;
+}
+#page-container.page-header-dark #page-header {
+  color: #cad4e7;
+  background-color: #ffffff;
+}
+.dataTables_filter {
+  text-align: right;
+}
+.icon-widget {
+  width: 50px;
+}
+.note-editable.card-block {
+  height: 350px;
+}
