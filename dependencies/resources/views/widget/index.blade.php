@@ -73,7 +73,7 @@
         <thead>
           <tr>
             <th class="text-center" style="width: 5%;">#</th>
-            <th class="d-none d-sm-table-cell">ชื่อหน้าเว็บ</th>
+            <th class="d-none d-sm-table-cell">ชื่อวิดเจ็ท</th>
             <th class="d-none d-sm-table-cell">ประเภท</th>
             <th class="d-none d-sm-table-cell text-center" style="width: 20%;">วันที่สร้าง</th>
             <th class="text-right"></th>
@@ -102,11 +102,11 @@
             </td>
             <td class="font-w600 text-center">{{$item->created_at}}</td>
             <td class="text-right">
-              {{-- <a href="{{ route('pages.edit', $item->widget_id) }}">
+              <a href="{{ route('widget.edit', $item->widget_id) }}">
                 <button type="button" class="btn btn-hero-sm btn-hero-warning btn-square" data-toggle="tooltip" id="delbutton" title="แก้ไข">
                   <i class="fa fa-pencil-alt"></i>
                 </button>
-              </a> --}}
+              </a>
               <button type="button" class="btn btn-hero-sm btn-hero-danger btn-square" data-toggle="tooltip" id="delbutton" title="ลบ" onclick="deletePage('{{ $item->widget_id }}');">
                 <i class="fa fa-trash"></i>
               </button>

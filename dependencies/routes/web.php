@@ -33,6 +33,7 @@ Route::prefix('/backend')->group(function () {
   Route::resource('widget', 'WidgetController');
   Route::get('/pages/customize/{id?}', 'WidgetController@customize')->name('pages_customize');
   Route::get('/pages/create_widget/{id?}/{widgetType?}', 'WidgetController@create')->name('create_widget');
+  Route::post('/pages/update_widget', 'WidgetController@update')->name('update_widget');
   Route::get('/pages/widget_destroy/{id?}', 'WidgetController@destroy')->name('widget_destroy');
   Route::post('/pages/widget/update_order', 'WidgetController@update_order')->name('update_order');
 

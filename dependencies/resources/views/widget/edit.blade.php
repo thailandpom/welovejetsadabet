@@ -11,7 +11,7 @@
         <ol class="breadcrumb">
           <li class="breadcrumb-item" aria-current="page"><a href="{{route('pages.index')}}">หน้าเว็บ</a></li>
           <li class="breadcrumb-item" aria-current="page"><a href="{{route('pages_customize', $page_id)}}">ปรับแต่ง</a></li>
-          <li class="breadcrumb-item active" aria-current="page">สร้าง</li>
+          <li class="breadcrumb-item active" aria-current="page">แก้ไข</li>
         </ol>
       </nav>
     </div>
@@ -85,16 +85,17 @@
   </div>
 	@endif
   
-  <form action="{{route('widget.store')}}" method="POST" enctype="multipart/form-data" >
+  <form action="{{route('update_widget')}}" method="POST" enctype="multipart/form-data" >
     {{csrf_field()}}
     <input type="hidden" name="page_fk_id" value="{{ $page_id }}" />
     <input type="hidden" name="widget_type" value="{{ $widgetType }}" />
+    <input type="hidden" name="widget_id" value="{{ $widgets->widget_id }}" />
     <div class="block block-rounded block-bordered">
       <div class="block-header block-header-default pr-1">
         <div class="row w-100">
           <div class="col-6">
             <h3 class="block-title w-100">
-              สร้างวิดเจ็ท : 
+              แก้ไขวิดเจ็ท : 
               @if($widgetType == 1)
               เนื้อหา
               @elseif($widgetType == 2)
@@ -110,7 +111,7 @@
               @endif
             </h3>
           </div>
-          <div class="col-6 px-0">
+          <div class="col-6 px-0 d-none">
             <div class="text-right d-flex justify-content-end">
               <label>
                 @if($widgetType == 1)
@@ -125,21 +126,21 @@
               </label>
               <select class="form-control {{$widgetType <= 3 ? 'w-25' : 'w-50'}} ml-3" name="amount_column" id="type">
                 @if($widgetType == 1 || $widgetType == 3)
-                <option value="1">1</option>
-                <option value="2">2</option>
+                <option value="1" {{ $widgets->amount_column == 1 ? 'selected' : '' }}>1</option>
+                <option value="2" {{ $widgets->amount_column == 2 ? 'selected' : '' }}>2</option>
                 @elseif($widgetType == 2)
-                <option value="1">1</option>
-                <option value="2">2</option>
-                <option value="3">3</option>
+                <option value="1" {{ $widgets->amount_column == 1 ? 'selected' : '' }}>1</option>
+                <option value="2" {{ $widgets->amount_column == 2 ? 'selected' : '' }}>2</option>
+                <option value="3" {{ $widgets->amount_column == 3 ? 'selected' : '' }}>3</option>
                 @elseif($widgetType == 4)
-                <option value="1">เนื้อหา & รูปภาพ</option>
-                <option value="2">รูปภาพ & เนื้อหา</option>
+                <option value="1" {{ $widgets->amount_column == 1 ? 'selected' : '' }}>เนื้อหา & รูปภาพ</option>
+                <option value="2" {{ $widgets->amount_column == 2 ? 'selected' : '' }}>รูปภาพ & เนื้อหา</option>
                 @elseif($widgetType == 5)
-                <option value="1">เนื้อหา & วิดีโอ</option>
-                <option value="2">วิดีโอ & เนื้อหา</option>
+                <option value="1" {{ $widgets->amount_column == 1 ? 'selected' : '' }}>เนื้อหา & วิดีโอ</option>
+                <option value="2" {{ $widgets->amount_column == 2 ? 'selected' : '' }}>วิดีโอ & เนื้อหา</option>
                 @elseif($widgetType == 6)
-                <option value="1">รูปภาพ & วิดีโอ</option>
-                <option value="2">วิดีโอ & รูปภาพ</option>
+                <option value="1" {{ $widgets->amount_column == 1 ? 'selected' : '' }}>รูปภาพ & วิดีโอ</option>
+                <option value="2" {{ $widgets->amount_column == 2 ? 'selected' : '' }}>วิดีโอ & รูปภาพ</option>
                 @endif
               </select>
             </div>
@@ -152,13 +153,13 @@
           <div class="col-8">
             <div class="form-group">
               <label for="">ชื่อวิดเจ็ด *</label>
-              <input type="text" id="widget_name" name="widget_name" class="form-control {{ $errors->has('widget_name') ? 'is-invalid' : '' }}" value="{{ old('widget_name') }}" required />
+              <input type="text" id="widget_name" value="{{ $widgets->widget_name }}" name="widget_name" class="form-control {{ $errors->has('widget_name') ? 'is-invalid' : '' }}" value="{{ old('widget_name') }}" required />
             </div>
           </div>
           <div class="col-4">
             <div class="form-group">
               <label for="">สีพื้นหลัง *</label>
-              <input id="bg_color" name="bg_color" type="text" class="form-control" value="#FFFFFF"/>
+              <input id="bg_color" name="bg_color" type="text" class="form-control" value="{{ $widgets->bg_color }}"/>
             </div>
           </div>
         </div>
@@ -168,13 +169,17 @@
             <div class="block block-rounded block-bordered">
               <div class="block-content tab-content">
                 <div class="row justify-content-center w-100 mb-5" id="type1">
-                  <div class="col-12">
+                  @if(isset($widget_contents) and !empty($widget_contents))
+                  @foreach ($widget_contents as $item)
+                  <div class="col-{{ (12 / $widgets->amount_column) }}">
                     <div class="form-group">
                       <label for="">เนื้อหา</label>
-                      <textarea id="content" class="js-summernote {{ $errors->has('content') ? 'is-invalid' : '' }}"
-                        name="content1"></textarea>
+                      <textarea id="content" class="js-summernote"
+                        name="content{{$loop->iteration}}">{{ $item->content }}</textarea>
                     </div>
                   </div>
+                  @endforeach
+                  @endif
                 </div>
               </div>
             </div>
@@ -186,17 +191,20 @@
             <div class="block block-rounded block-bordered">
               <div class="block-content tab-content">
                 <div class="row mx-0 justify-content-center w-100 mb-5" id="type1">
-                  <div class="col-12 px-0">
+                  @if(isset($widget_contents) and !empty($widget_contents))
+                  @foreach ($widget_contents as $item)
+                  <div class="col-{{ (12 / $widgets->amount_column) }} px-0">
                     <div class="row justify-content-center">
                       <div class="col-4">
                         <div class="form-group">
                           <label for="">รูปภาพ</label>
                           <div class="">
                             <div id="imagePreview">
-                              <img src="{{config('app.url') }}/assets/images/no-picture.png"
+                              <img src="{{config('app.url') }}/media/widget/{{$item->image}}"
                                 class="imagePreview1 thumbnail" style="width: 100%;height: auto;" />
                             </div>
-                            <input type="file" name="file1" id="image1" class="form-control {{ $errors->has('file') ? 'is-invalid' : '' }}" accept="image/png, image/jpeg, image/gif, image/jpg" required />
+                            <input type="file" name="file{{$loop->iteration}}" id="image{{$loop->iteration}}" class="form-control" 
+                            accept="image/png, image/jpeg, image/gif, image/jpg" />
                           </div>
                         </div>
                       </div>
@@ -205,7 +213,7 @@
                       <div class="col-4">
                         <div class="form-group">
                           <label for="">ลิ้งค์</label>
-                          <input type="text" name="link1" class="form-control"  />
+                          <input type="text" name="link{{$loop->iteration}}" value="{{ $item->link }}" class="form-control"  />
                         </div>
                       </div>
                     </div>
@@ -213,11 +221,13 @@
                       <div class="col-4">
                         <div class="form-group">
                           <label for="">ALT</label>
-                          <input type="text" name="img_alt1" class="form-control"  />
+                          <input type="text" name="img_alt{{$loop->iteration}}" value="{{ $item->img_alt }}" class="form-control"  />
                         </div>
                       </div>
                     </div>
                   </div>
+                  @endforeach
+                  @endif
                 </div>
               </div>
             </div>
@@ -229,12 +239,16 @@
             <div class="block block-rounded block-bordered">
               <div class="block-content tab-content">
                 <div class="row justify-content-center w-100 mb-5" id="type1">
-                  <div class="col-6">
+                  @if(isset($widget_contents) and !empty($widget_contents))
+                  @foreach ($widget_contents as $item)
+                  <div class="col-{{ (12 / $widgets->amount_column) }}">
                     <div class="form-group">
                       <label for="">วิดีโอ ลิ้งค์</label>
-                      <input type="text" required name="youtube_link1" class="form-control" placeholder="Ex : https://www.youtube.com/watch?v=uaWA2GbcnJU" />
+                      <input type="text" required name="youtube_link{{$loop->iteration}}" value="{{$item->youtube_link}}" class="form-control" placeholder="Ex : https://www.youtube.com/watch?v=uaWA2GbcnJU" />
                     </div>
                   </div>
+                  @endforeach
+                  @endif
                 </div>
               </div>
             </div>
@@ -249,7 +263,7 @@
                   <div class="col-8">
                     <div class="form-group">
                       <label for="">เนื้อหา</label>
-                      <textarea id="content" class="js-summernote"name="content"></textarea>
+                      <textarea id="content" class="js-summernote"name="content">{{ $widget_contents[0]->content }}</textarea>
                     </div>
                   </div>
                   <div class="col-4">
@@ -257,19 +271,20 @@
                       <label for="">รูปภาพ</label>
                       <div class="">
                         <div id="imagePreview">
-                          <img src="{{config('app.url') }}/assets/images/no-picture.png"
+                          <img src="{{config('app.url') }}/media/widget/{{$widget_contents[0]->image}}"
                             class="imagePreview1 thumbnail" style="width: 100%;height: auto;" />
                         </div>
-                        <input type="file" name="file" id="image1" class="form-control" accept="image/png, image/jpeg, image/gif, image/jpg" required />
+                        <input type="file" name="file" id="image1" class="form-control" 
+                        accept="image/png, image/jpeg, image/gif, image/jpg"  />
                       </div>
                     </div>
                     <div class="form-group">
                       <label for="">ลิ้งค์</label>
-                      <input type="text" name="link" class="form-control"  />
+                      <input type="text" name="link" value="{{$widget_contents[0]->link}}" class="form-control"  />
                     </div>
                     <div class="form-group">
                       <label for="">ALT</label>
-                      <input type="text" name="img_alt" class="form-control"  />
+                      <input type="text" name="img_alt" value="{{$widget_contents[0]->img_alt}}" class="form-control"  />
                     </div>
                   </div>
                 </div>
@@ -286,13 +301,13 @@
                   <div class="col-8">
                     <div class="form-group">
                       <label for="">เนื้อหา</label>
-                      <textarea id="content" class="js-summernote"name="content"></textarea>
+                      <textarea id="content" class="js-summernote"name="content">{{ $widget_contents[0]->content }}</textarea>
                     </div>
                   </div>
                   <div class="col-4">
                     <div class="form-group">
                       <label for="">วิดีโอ ลิ้งค์</label>
-                      <input type="text" required name="youtube_link" class="form-control" placeholder="Ex : https://www.youtube.com/watch?v=uaWA2GbcnJU" />
+                      <input type="text" required name="youtube_link" value="{{$widget_contents[0]->youtube_link}}" class="form-control" placeholder="Ex : https://www.youtube.com/watch?v=uaWA2GbcnJU" />
                     </div>
                   </div>
                 </div>
@@ -311,25 +326,26 @@
                       <label for="">รูปภาพ</label>
                       <div class="">
                         <div id="imagePreview">
-                          <img src="{{config('app.url') }}/assets/images/no-picture.png"
+                          <img src="{{config('app.url') }}/media/widget/{{$widget_contents[0]->image}}"
                             class="imagePreview1 thumbnail" style="width: 100%;height: auto;" />
                         </div>
-                        <input type="file" name="file" id="image1" class="form-control" accept="image/png, image/jpeg, image/gif, image/jpg" required />
+                        <input type="file" name="file" id="image1" class="form-control" 
+                        accept="image/png, image/jpeg, image/gif, image/jpg"  />
                       </div>
                     </div>
                     <div class="form-group">
                       <label for="">ลิ้งค์</label>
-                      <input type="text" name="link" class="form-control"  />
+                      <input type="text" name="link" {{$widget_contents[0]->link}} class="form-control"  />
                     </div>
                     <div class="form-group">
                       <label for="">ALT</label>
-                      <input type="text" name="img_alt" class="form-control"  />
+                      <input type="text" name="img_alt" value="{{$widget_contents[0]->img_alt}}" class="form-control"  />
                     </div>
                   </div>
                   <div class="col-8">
                     <div class="form-group">
                       <label for="">วิดีโอ ลิ้งค์</label>
-                      <input type="text" required name="youtube_link" class="form-control" placeholder="Ex : https://www.youtube.com/watch?v=uaWA2GbcnJU" />
+                      <input type="text" required name="youtube_link" value="{{$widget_contents[0]->youtube_link}}" class="form-control" placeholder="Ex : https://www.youtube.com/watch?v=uaWA2GbcnJU" />
                     </div>
                   </div>
                 </div>
@@ -341,7 +357,7 @@
         <div class="row">
           <div class="col-12 text-center">
             <div class="form-group">
-              <button class="btn btn-hero-success btn-square" type="submit">สร้าง <i
+              <button class="btn btn-hero-success btn-square" type="submit">แก้ไข <i
                   class="fa fa-plus"></i></button>
               <a href="{{route('pages_customize', $page_id)}}" class="btn btn-square btn-hero-secondary">ยกเลิก <i
                   class="fa fa-times"></i> </a>
@@ -365,6 +381,8 @@
   });
 
   function getTextCol(amount) {
+    //var items = <?=$widget_contents?>;
+    //console.log(items);
     var column;
     if(amount == 1) {
       column = 12;
