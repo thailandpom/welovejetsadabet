@@ -103,6 +103,7 @@
                       <select name="type" id="" class="form-control">
                         <option value="1" {{ $contacts->type == 1 ? "selected" : ''}}>เบอร์โทรศัพท์</option>
                         <option value="2" {{ $contacts->type == 2 ? "selected" : ''}}>ไลน์</option>
+                        <option value="4" {{ $contacts->type == 4 ? "selected" : ''}}>ไลน์@</option>
                         <option value="3" {{ $contacts->type == 3 ? "selected" : ''}}>อีเมล</option>
                       </select>
                     </div>

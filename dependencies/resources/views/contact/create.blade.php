@@ -101,7 +101,8 @@
                       <label for="">ประเภท *</label>
                       <select name="type" id="" class="form-control">
                         <option value="1">เบอร์โทรศัพท์</option>
-                        <option value="2">ไลน์</option>
+                        <option value="2">ไลน์ ID</option>
+                        <option value="4">ไลน์@</option>
                         <option value="3">อีเมล</option>
                       </select>
                     </div>
