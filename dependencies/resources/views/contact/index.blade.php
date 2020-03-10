@@ -86,9 +86,11 @@
               @if($item->type == 1)
               เบอร์โทรศัพท์
               @elseif($item->type == 2)
-              ไลน์
+              ไลน์ ID
               @elseif($item->type == 3)
               อีเมล
+              @else
+              LINE @
               @endif
             </td>
             <td class="font-w600 text-center">{{$item->created_at}}</td>
